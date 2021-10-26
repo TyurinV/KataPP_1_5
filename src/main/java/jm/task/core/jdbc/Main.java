@@ -20,6 +20,5 @@ public class Main {
         one.saveUser("Иван", "Грозный", (byte) 55);
         one.getAllUsers().stream().forEach(System.out::println);
         one.cleanUsersTable();
-        one.removeUserById(19);
     }
 }
