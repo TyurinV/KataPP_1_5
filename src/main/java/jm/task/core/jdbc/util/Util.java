@@ -11,10 +11,17 @@ public class Util {
     private final String USERNAME = "root";
     private final String PASSWORD = "parol123";
 
-    public Connection getConnection() {
+    public Util() {
         try {
             driver = new com.mysql.cj.jdbc.Driver();
             DriverManager.registerDriver(driver);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public Connection getConnection() {
+        try {
             connection = DriverManager.getConnection(URL, USERNAME, PASSWORD);
         } catch (SQLException e) {
             System.out.println("Не удалось загрузить класс драйвер");
@@ -24,3 +31,4 @@ public class Util {
 
 
 }
+
