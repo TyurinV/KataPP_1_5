@@ -15,9 +15,7 @@ public class UserDaoHibernateImpl implements UserDao {
     private Util util = new Util();
 
     public UserDaoHibernateImpl() {
-
     }
-
 
     @Override
     public void createUsersTable() {
@@ -31,7 +29,6 @@ public class UserDaoHibernateImpl implements UserDao {
                     " lastName VARCHAR(45), " +
                     " age tinyint(3), " +
                     " PRIMARY KEY ( id ))").executeUpdate();
-
 
             transaction.commit();
             session.close();
@@ -76,9 +73,10 @@ public class UserDaoHibernateImpl implements UserDao {
 
     @Override
     public void removeUserById(long id) {
+        Transaction transaction = null;
         try {
             Session session = getSessionFactory().openSession();
-            Transaction transaction = session.beginTransaction();
+            transaction = session.beginTransaction();
 
             session.createSQLQuery("DELETE FROM user where id = :id")
                     .setParameter("id", id)
@@ -86,7 +84,10 @@ public class UserDaoHibernateImpl implements UserDao {
 
             transaction.commit();
             session.close();
-        } catch (HibernateException e) {
+        } catch (Exception e) {
+            if (transaction != null) {
+                transaction.rollback();
+            }
             e.printStackTrace();
         }
     }
@@ -106,13 +107,17 @@ public class UserDaoHibernateImpl implements UserDao {
 
     @Override
     public void cleanUsersTable() {
+        Transaction transaction = null;
         try {
             Session session = Util.getSessionFactory().openSession();
-            Transaction transaction = session.beginTransaction();
+            transaction = session.beginTransaction();
             session.createSQLQuery("truncate table User").executeUpdate();
             transaction.commit();
             session.close();
-        } catch (HibernateException e) {
+        } catch (Exception e) {
+            if (transaction != null) {
+                transaction.rollback();
+            }
             e.printStackTrace();
         }
     }

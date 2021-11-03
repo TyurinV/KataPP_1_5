@@ -19,27 +19,14 @@ public class Main {
     public static void main(String[] args) {
 
         UserService one = new UserServiceImpl();
+
         one.createUsersTable();
-
-//        one.saveUser("Владимир", "Вольфович", (byte) 36);
-//        one.saveUser("Иван", "Иванов", (byte) 33);
-//        one.saveUser("Алиса", "Фомина", (byte) 22);
-//        one.saveUser("Тарас", "Бульба", (byte) 17);
-//        one.saveUser("Иван", "Грозный", (byte) 55);
-//            one.removeUserById(1);
-    //    one.dropUsersTable();
-
-
-//        UserService one = new UserServiceImpl();
-
-//        one.saveUser("Иван", "Иванов", (byte) 33);
-//        one.saveUser("Алиса", "Фомина", (byte) 22);
-//        one.saveUser("Тарас", "Бульба", (byte) 17);
-//        one.saveUser("Иван", "Грозный", (byte) 55);
+        one.saveUser("Владимир", "Вольфович", (byte) 36);
+        one.saveUser("Иван", "Иванов", (byte) 33);
+        one.saveUser("Алиса", "Фомина", (byte) 22);
+        one.saveUser("Тарас", "Бульба", (byte) 17);
         one.getAllUsers().stream().forEach(System.out::println);
         one.cleanUsersTable();
-////        one.cleanUsersTable();
-////        one.dropUsersTable();
-
+        one.dropUsersTable();
     }
 }
