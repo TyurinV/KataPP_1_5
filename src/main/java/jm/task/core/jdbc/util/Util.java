@@ -13,7 +13,7 @@ import java.util.Properties;
 
 public class Util {
     private Driver driver;
-    Connection connection = null;
+
 
     private static String URL = "jdbc:mysql://localhost:3306/users";
     private static final String USERNAME = "root";
@@ -30,8 +30,9 @@ public class Util {
     }
 
     public Connection getConnection() {
+        Connection connection = null;
         try {
-            connection = DriverManager.getConnection(URL, USERNAME, PASSWORD);
+             connection = DriverManager.getConnection(URL, USERNAME, PASSWORD);
         } catch (SQLException e) {
             System.out.println("Не удалось загрузить класс драйвер");
         }
@@ -55,7 +56,7 @@ public class Util {
 
                 settings.put(Environment.SHOW_SQL, "true");
                 settings.put(Environment.CURRENT_SESSION_CONTEXT_CLASS, "thread");
-              //  settings.put(Environment.HBM2DDL_AUTO, "create-drop");
+                settings.put(Environment.HBM2DDL_AUTO, "validate");
                 configuration.setProperties(settings);
                 configuration.addAnnotatedClass(User.class);
                 ServiceRegistry serviceRegistry = new StandardServiceRegistryBuilder()
